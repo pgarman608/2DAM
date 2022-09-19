@@ -5,6 +5,9 @@
  */
 package javaapplication1;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Serrperry
@@ -16,6 +19,12 @@ public class Frame1 extends javax.swing.JFrame {
      */
     public Frame1() {
         initComponents();
+        this.setSize(400, 200);
+        this.setTitle("Suma y resta");
+        this.setResizable(rootPaneCheckingEnabled);
+        this.setLocationRelativeTo(this);
+        this.jButton1.addActionListener(new Calcular(this.zonaI, this.zonaD, this.jLabel1,this.jButton1));
+        this.jButton2.addActionListener(new Calcular(this.zonaI, this.zonaD, this.jLabel1,this.jButton2));
     }
 
     /**
@@ -125,7 +134,6 @@ public class Frame1 extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -143,4 +151,28 @@ public class Frame1 extends javax.swing.JFrame {
     private javax.swing.JTextArea zonaD;
     private javax.swing.JTextArea zonaI;
     // End of variables declaration//GEN-END:variables
+}
+
+class Calcular implements ActionListener{
+    private javax.swing.JTextArea zonaD;
+    private javax.swing.JTextArea zonaI;
+    private javax.swing.JLabel solucion;
+    private javax.swing.JButton boton;
+    public Calcular (javax.swing.JTextArea pZonaI, javax.swing.JTextArea pZonaD, javax.swing.JLabel pSolucion, javax.swing.JButton pBoton){
+        this.zonaD = pZonaD;
+        this.zonaI = pZonaI;
+        this.solucion = pSolucion;
+        this.boton = pBoton;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        int calc = 0;
+        if ("Suma".equals(this.boton.getText())) {
+            calc = Integer.parseInt(this.zonaD.getText()) + Integer.parseInt(this.zonaI.getText());
+        }else{
+            System.out.println("restar");
+            calc = Integer.parseInt(this.zonaI.getText()) - Integer.parseInt(this.zonaD.getText());
+        }
+        this.solucion.setText("El resultado de la operación es:" + calc);
+    }
 }
