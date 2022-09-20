@@ -22,6 +22,7 @@ public class Frame1 extends JFrame{
     }
     public void initComponent(){
         this.setSize(300,120);
+        this.setLocationRelativeTo(this);
         texto = new JTextField("0",20);
         texto.setEditable(false);
         boton = new JButton("Pulse para incrementar");
