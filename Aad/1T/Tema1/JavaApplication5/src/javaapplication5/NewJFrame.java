@@ -6,13 +6,7 @@
 package javaapplication5;
 
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -21,14 +15,17 @@ import javax.swing.table.TableModel;
 public class NewJFrame extends javax.swing.JFrame {
     private File myfile;
     private DefaultTableModel modelo;
+    private Object[] datos;
     public NewJFrame() {
         initComponents();
-        this.setResizable(false);
-        this.setLocationRelativeTo(this);
-        this.setTitle("Practica 01 | T1 Manejo de ficheros | Hecho por: Pablo García Manzano");
+        this.datos = new Object[4];
         this.modelo = (DefaultTableModel) this.tabla.getModel();
     }
-
+    private void removeAllRows(){
+        for( int i = modelo.getRowCount() - 1; i >= 0; i-- ){
+            modelo.removeRow(i);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,6 +41,8 @@ public class NewJFrame extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Practica 01 | T1 Manejo de ficheros | Hecho por: Pablo García Manzano");
+        setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(600, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 400));
@@ -167,10 +166,11 @@ public class NewJFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_directorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_directorioActionPerformed
-        Object[] datos = new Object[4];
+        removeAllRows();
         this.myfile = new File(this.jt_Directorio.getText());
         if (!this.myfile.exists()) {
             this.jt_Directorio.setText("");
@@ -183,57 +183,46 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (pExt > 0) {
                     ext = file.getName().substring(pExt);
                 }
-                datos[0] = file.getName();
-                datos[1] = ext;
-                datos[2] = file.length();
-                if (file.isDirectory()) {
-                    datos[3] = "Es un Directorio";
-                }else{
-                    if (file.isFile()) {
-                        datos[3] = "Es un Fichero";
-                    }
-                }
+                this.datos[0] = file.getName();
+                this.datos[1] = ext;
+                this.datos[2] = file.length();
+                this.datos[3] = this.esFoD(file);
                 this.modelo.addRow(datos);
             }
         }
     }//GEN-LAST:event_btn_directorioActionPerformed
 
     private void btn_ExtensionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExtensionActionPerformed
-        Object[] datos = new Object[4];
+        this.removeAllRows();
         this.myfile = new File(this.jt_Directorio.getText());
-        if (!this.myfile.exists()) {
-            this.jt_Directorio.setText("");
-            this.jl_fallo.setText("No existe la ruta");
-        }else{
-            this.jl_fallo.setText(" ");
-            String ext = this.jt_Extension.getText();
-            String name = this.jt_Directorio.getName();
-            this.removeAllRows(); 
-            for (File file : this.myfile.listFiles()) {
-                if (file.getName().contains(ext)) {
-                   int pExt = file.getName().lastIndexOf(".");
+        this.jl_fallo.setText(" ");
+        String ext = this.jt_Extension.getText();
+        String name = this.jt_Directorio.getName();
+        for (File file : this.myfile.listFiles()) {
+            if (file.getName().contains(ext) && !this.jt_Extension.getText().isEmpty()) {
+                int pExt = file.getName().lastIndexOf(".");
                 if (pExt > 0) {
                     ext = file.getName().substring(pExt);
                 }
-                datos[0] = file.getName();
-                datos[1] = ext;
-                datos[2] = file.length();
-                if (file.isDirectory()) {
-                    datos[3] = "Es un Directorio";
-                }else{
-                    if (file.isFile()) {
-                        datos[3] = "Es un Fichero";
-                    }
-                }
+                this.datos[0] = file.getName();
+                this.datos[1] = ext;
+                this.datos[2] = file.length();
+                this.datos[3] = this.esFoD(file);
                 this.modelo.addRow(datos);
-                }
             }
         }
     }//GEN-LAST:event_btn_ExtensionActionPerformed
-    private void removeAllRows(){
-        for( int i = modelo.getRowCount() - 1; i >= 0; i-- ){
-            modelo.removeRow(i);
+    
+    private String esFoD(File file){
+        String aux = "";
+        if (file.isDirectory()) {
+            this.datos[3] = "Es un Directorio";
+        } else {
+            if (file.isFile()) {
+                this.datos[3] = "Es un Fichero";
+            }
         }
+        return aux;
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -261,6 +250,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new NewJFrame().setVisible(true);
             }
