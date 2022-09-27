@@ -189,15 +189,22 @@ public class JFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_directorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_directorioActionPerformed
+        //Eliminaremos los filtros y las filas que tengan anteriormente creadas
         this.tabla.setRowSorter(null);
         this.removeAllRows();
         this.filtradorTabla.setRowFilter(null);
+        //Guardaremos en un cursor el texto del Text field de directorio 
         this.fileDireccion = new File(this.jt_Directorio.getText());
+        //Comprobaremos que no existe la direccion del cursor o que este vacio
         if (!this.fileDireccion.exists() || this.jt_Directorio.getText().equals("")) {
+            //Eliminaremos el texto del text field de directorio
             this.jt_Directorio.setText("");
+            //Pondremos que la ruta introducida no existe en el label de fallos
             this.jl_fallo.setText("No existe la ruta");
         }else{
+            //Eliminamos la informacion del label de fallos
             this.jl_fallo.setText(" ");
+            //Crearemos un bucle que guarde cada ubicacion encontrada en el cursor
             for (File file : this.fileDireccion.listFiles()) {
                 String ext = "";
                 int pExt = file.getName().lastIndexOf(".");
@@ -212,13 +219,28 @@ public class JFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_directorioActionPerformed
-
+    /**
+     * En este evento tendremos que filtrar la tabla por la extension que hallamos
+     * puesto en el Text field que está al lado de Indique extension y la tabla
+     * generada anteriormente
+     * @param evt 
+     */
     private void btn_ExtensionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExtensionActionPerformed
-        if (!this.jt_Extension.getText().equals("")) {
-            this.tabla.setRowSorter(filtradorTabla);
-            this.filtradorTabla.setRowFilter(RowFilter.regexFilter(this.jt_Extension.getText(), 1));
+        //Miramos que la tabla no este vacia
+        if (this.modeloTabla.getRowCount() == 0) {
+            //Si esta vacia le diremos que la tabla no debe estar vacia
+            this.jl_fallo.setText("La tabla no debe esta vacia");
         }else{
-            this.jl_fallo.setText("El apartado de indicar la extension está vacio");
+            //Miramos que el text field no esté vacio 
+            if (this.jt_Extension.getText().equals("")) {
+                //Se lo decimos que ese apartado no debe estar vacio
+                this.jl_fallo.setText("El apartado de indicar la extension esta vacio");
+            } else {
+                //Filtraremos por la text field de extension y la segunda 
+                //posicion de la tabla
+                this.tabla.setRowSorter(filtradorTabla);
+                this.filtradorTabla.setRowFilter(RowFilter.regexFilter(this.jt_Extension.getText(), 1));
+            }
         }
     }//GEN-LAST:event_btn_ExtensionActionPerformed
     /**
