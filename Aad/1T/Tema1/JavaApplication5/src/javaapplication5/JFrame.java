@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javaapplication5;
 
 import java.io.File;
@@ -13,22 +8,36 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author usuario
+ * @author Pablo García Manzano
  */
-public class NewJFrame extends javax.swing.JFrame {
-    private File myfile;
-    private DefaultTableModel modelo;
-    private Object[] datos;
-    private TableRowSorter<TableModel> ordTabla;
-    public NewJFrame() {
+public class JFrame extends javax.swing.JFrame {
+    private File fileDireccion;
+    private DefaultTableModel modeloTabla;
+    private Object[] datosTabla;
+    private TableRowSorter<TableModel> filtradorTabla;
+    public JFrame() {
+        //Iniciaremos los componentes introducidos en el apartado de Design
         initComponents();
-        this.datos = new Object[4];
-        this.modelo = (DefaultTableModel) this.tabla.getModel();
-        this.ordTabla = new TableRowSorter<TableModel>(this.modelo);
+        //Crearemos un array estatico para guardar en un futuro la informacion
+        //que saquemos de la direccion introducida
+        this.datosTabla = new Object[4];
+        //Crearemos un modelo de la tabla prinicipal para que podamos introducir
+        //y eliminar datos de la tabla
+        this.modeloTabla = (DefaultTableModel) this.tabla.getModel();
+        //Crearemos una clase que venga de tableRowSorter para poder ordenar y
+        //filtrar la tabla
+        this.filtradorTabla = new TableRowSorter<TableModel>(this.modeloTabla);
     }
-    private void removeAllRows(int numRow){
-        for( int i = modelo.getRowCount() - 1; i >= 0; i-- ){
-            modelo.removeRow(i);
+    /**
+     * Crearemos un metodo con el que podamos eliminar todos las filas de 
+     * la tabla
+     */
+    private void removeAllRows(){
+        //Tendremos un bucle donde nos moveremos por todas las firas de la tabla
+        for( int i = modeloTabla.getRowCount() - 1; i >= 0; i-- ){
+            //Y con este metodo que nos da DefaultTableModel iremos eliminando
+            //todas las filas una a una
+            modeloTabla.removeRow(i);
         }
     }
     @SuppressWarnings("unchecked")
@@ -83,6 +92,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jt_Extension.setForeground(new java.awt.Color(0, 255, 0));
 
         jl_fallo.setForeground(new java.awt.Color(255, 0, 0));
+        jl_fallo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_fallo.setText(" ");
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,27 +131,31 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jl_directorio)
-                        .addGap(18, 18, 18)
-                        .addComponent(jt_Directorio, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_directorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jl_extension)
-                        .addGap(18, 18, 18)
+                        .addGap(138, 138, 138)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jl_fallo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jt_Extension, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Extension, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jl_directorio)
+                                .addGap(18, 18, 18)
+                                .addComponent(jt_Directorio, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_directorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jl_extension)
+                                .addGap(18, 18, 18)
+                                .addComponent(jt_Extension, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_Extension, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(jl_fallo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,45 +190,58 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btn_directorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_directorioActionPerformed
         this.tabla.setRowSorter(null);
-        this.removeAllRows(this.modelo.getRowCount());
-        this.ordTabla.setRowFilter(null);
-        this.myfile = new File(this.jt_Directorio.getText());
-        if (!this.myfile.exists() || this.jt_Directorio.getText().equals("")) {
+        this.removeAllRows();
+        this.filtradorTabla.setRowFilter(null);
+        this.fileDireccion = new File(this.jt_Directorio.getText());
+        if (!this.fileDireccion.exists() || this.jt_Directorio.getText().equals("")) {
             this.jt_Directorio.setText("");
             this.jl_fallo.setText("No existe la ruta");
         }else{
             this.jl_fallo.setText(" ");
-            for (File file : this.myfile.listFiles()) {
+            for (File file : this.fileDireccion.listFiles()) {
                 String ext = "";
                 int pExt = file.getName().lastIndexOf(".");
                 if (pExt > 0) {
                     ext = file.getName().substring(pExt);
                 }
-                this.datos[0] = file.getName();
-                this.datos[1] = ext;
-                this.datos[2] = file.length();
-                this.datos[3] = this.esFoD(file);
-                this.modelo.addRow(datos);
+                this.datosTabla[0] = file.getName();
+                this.datosTabla[1] = ext;
+                this.datosTabla[2] = file.length();
+                this.datosTabla[3] = this.esFoD(file);
+                this.modeloTabla.addRow(datosTabla);
             }
         }
     }//GEN-LAST:event_btn_directorioActionPerformed
 
     private void btn_ExtensionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExtensionActionPerformed
         if (!this.jt_Extension.getText().equals("")) {
-            this.tabla.setRowSorter(ordTabla);
-            this.ordTabla.setRowFilter(RowFilter.regexFilter(this.jt_Extension.getText(), 1));
+            this.tabla.setRowSorter(filtradorTabla);
+            this.filtradorTabla.setRowFilter(RowFilter.regexFilter(this.jt_Extension.getText(), 1));
         }else{
-            
+            this.jl_fallo.setText("El apartado de indicar la extension está vacio");
         }
     }//GEN-LAST:event_btn_ExtensionActionPerformed
-    
+    /**
+     * En este metodo veremos con un cursor que si es un fichero o un directorio.
+     * Según si es directorio o fichero sacaremos un texto donde diga que es.
+     * @param file El cursor que utilizaremos 
+     * @return El texto que sacaremos según si es fichero o directorio
+     */
     private String esFoD(File file){
+        //Crearemos una variable para guardad el texto: "Es un direcorio" o 
+        //"Es un Fichero"
         String aux = "";
+        //Le preguntamos al cursor si es un directorio
         if (file.isDirectory()) {
-            this.datos[3] = "Es un Directorio";
+            //Sabiendo que es un directorio guardaremos en la variable "Es un 
+            //Directorio"
+            aux = "Es un Directorio";
         } else {
+            //Le preguntamos al cursor si es un fichero
             if (file.isFile()) {
-                this.datos[3] = "Es un Fichero";
+                //Sabiendo que es un fichero guardaremos en la variable "Es un 
+                //fichero"
+                aux = "Es un Fichero";
             }
         }
         return aux;
@@ -233,21 +260,22 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new NewJFrame().setVisible(true);
+                new JFrame().setVisible(true);
             }
         });
     }
