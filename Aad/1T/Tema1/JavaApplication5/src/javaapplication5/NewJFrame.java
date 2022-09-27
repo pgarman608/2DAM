@@ -6,7 +6,10 @@
 package javaapplication5;
 
 import java.io.File;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -16,12 +19,14 @@ public class NewJFrame extends javax.swing.JFrame {
     private File myfile;
     private DefaultTableModel modelo;
     private Object[] datos;
+    private TableRowSorter<TableModel> ordTabla;
     public NewJFrame() {
         initComponents();
         this.datos = new Object[4];
         this.modelo = (DefaultTableModel) this.tabla.getModel();
+        this.ordTabla = new TableRowSorter<TableModel>(this.modelo);
     }
-    private void removeAllRows(){
+    private void removeAllRows(int numRow){
         for( int i = modelo.getRowCount() - 1; i >= 0; i-- ){
             modelo.removeRow(i);
         }
@@ -170,9 +175,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_directorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_directorioActionPerformed
-        removeAllRows();
+        this.tabla.setRowSorter(null);
+        this.removeAllRows(this.modelo.getRowCount());
+        this.ordTabla.setRowFilter(null);
         this.myfile = new File(this.jt_Directorio.getText());
-        if (!this.myfile.exists()) {
+        if (!this.myfile.exists() || this.jt_Directorio.getText().equals("")) {
             this.jt_Directorio.setText("");
             this.jl_fallo.setText("No existe la ruta");
         }else{
@@ -193,23 +200,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_directorioActionPerformed
 
     private void btn_ExtensionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExtensionActionPerformed
-        this.removeAllRows();
-        this.myfile = new File(this.jt_Directorio.getText());
-        this.jl_fallo.setText(" ");
-        String ext = this.jt_Extension.getText();
-        String name = this.jt_Directorio.getName();
-        for (File file : this.myfile.listFiles()) {
-            if (file.getName().contains(ext) && !this.jt_Extension.getText().isEmpty()) {
-                int pExt = file.getName().lastIndexOf(".");
-                if (pExt > 0) {
-                    ext = file.getName().substring(pExt);
-                }
-                this.datos[0] = file.getName();
-                this.datos[1] = ext;
-                this.datos[2] = file.length();
-                this.datos[3] = this.esFoD(file);
-                this.modelo.addRow(datos);
-            }
+        if (!this.jt_Extension.getText().equals("")) {
+            this.tabla.setRowSorter(ordTabla);
+            this.ordTabla.setRowFilter(RowFilter.regexFilter(this.jt_Extension.getText(), 1));
+        }else{
+            
         }
     }//GEN-LAST:event_btn_ExtensionActionPerformed
     
