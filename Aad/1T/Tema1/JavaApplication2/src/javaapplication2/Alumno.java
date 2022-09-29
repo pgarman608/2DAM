@@ -15,15 +15,39 @@ import java.util.Date;
 public class Alumno {
     private int numExp;
     private Double notaMedia;
-    private String ape12Nombre;
+    private String apellido1, apellido2, nombre;
     private Date fechaNac;
-    private SimpleDateFormat dateForm;
-    public Alumno(int numExp, Double notaMedia,String ape12Nombre, Date fechaNac){
+    public static SimpleDateFormat dateForm;
+    public Alumno(int numExp, Double notaMedia,String nombre,String apellido1,
+            String apellido2, Date fechaNac){
         this.dateForm = new SimpleDateFormat("dd/MM/yyyy");
         this.numExp = numExp;
         this.notaMedia = notaMedia;
-        this.ape12Nombre = ape12Nombre;
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
         this.fechaNac = fechaNac;
+    }
+
+
+    Alumno(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
     }
 
     public int getNumExp() {
@@ -42,12 +66,12 @@ public class Alumno {
         this.notaMedia = notaMedia;
     }
 
-    public String getApe12Nombre() {
-        return ape12Nombre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setApe12Nombre(String ape12Nombre) {
-        this.ape12Nombre = ape12Nombre;
+    public void setNombre(String Nombre) {
+        this.nombre = Nombre;
     }
 
     public Date getFechaNacCompleto() {
@@ -65,5 +89,12 @@ public class Alumno {
     public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
-    
+    @Override
+    public String toString(){
+        String aux = "";
+        aux = "Nombre: " + this.nombre + "\nApellidos: " + this.apellido1 
+                + "\nExperiencia: " + this.numExp + "\nNotaMedia: " + this.notaMedia 
+                + "\nFecha de Nacimiento: " + this.dateForm.format(fechaNac);
+        return aux;
+    }
 }
