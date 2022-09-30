@@ -1,10 +1,10 @@
 ﻿Public Class Form1
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Dim ix As Integer = 0
-        While ix <= 20
-            Dim capCamn As Integer
+        For ix = 1 To 20
+            Dim capCamn As Integer = 0
             Do While capCamn < 18000 Or capCamn > 28000
-                capCamn = InputBox("Introduzca la capacidad del camion nº" & (ix + 1).ToString, "Datos capacidad")
+                capCamn = InputBox("Introduzca la capacidad del camion nº" & ix.ToString, "Datos capacidad", )
                 If capCamn >= 18000 And capCamn <= 28000 Then
                     ix = ix + 1
                     Dim saca As Integer
@@ -26,14 +26,16 @@
                     If ix = 20 Then
                         MsgBox("Camion lleno, fin de la jornada")
                     Else
+                        saca = 0
                         capCamn = 0
+                        Capaux = 0
                         MsgBox("Camion lleno, pase al siguiente")
                     End If
                 Else
                     MsgBox("Numero introducido deberia ser entre 18000 y 28000")
                 End If
             Loop
-        End While
-        lfin.Text = "Finalizada la carga del dia"
+            lfin.Text = "Finalizada la carga del dia"
+        Next
     End Sub
 End Class
