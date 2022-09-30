@@ -1,6 +1,4 @@
-﻿Imports System.Threading
-
-Public Class Form1
+﻿Public Class Form1
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Dim ix As Integer = 0
         While ix <= 20
@@ -36,6 +34,6 @@ Public Class Form1
                 End If
             Loop
         End While
+        lfin.Text = "Finalizada la carga del dia"
     End Sub
-
 End Class

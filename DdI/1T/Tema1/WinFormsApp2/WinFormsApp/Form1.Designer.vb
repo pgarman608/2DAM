@@ -22,24 +22,23 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.prueba = New System.Windows.Forms.Label()
+        Me.lfin = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'prueba
+        'lfin
         '
-        Me.prueba.AutoSize = True
-        Me.prueba.Location = New System.Drawing.Point(297, 123)
-        Me.prueba.Name = "prueba"
-        Me.prueba.Size = New System.Drawing.Size(41, 15)
-        Me.prueba.TabIndex = 0
-        Me.prueba.Text = "Label1"
+        Me.lfin.AutoSize = True
+        Me.lfin.Location = New System.Drawing.Point(407, 214)
+        Me.lfin.Name = "lfin"
+        Me.lfin.Size = New System.Drawing.Size(0, 15)
+        Me.lfin.TabIndex = 0
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.prueba)
+        Me.Controls.Add(Me.lfin)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
@@ -47,5 +46,5 @@ Partial Class Form1
 
     End Sub
 
-    Friend WithEvents prueba As Label
+    Friend WithEvents lfin As Label
 End Class
