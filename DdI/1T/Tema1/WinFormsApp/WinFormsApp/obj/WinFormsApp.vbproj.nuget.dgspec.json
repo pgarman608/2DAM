@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\usuario\\Desktop\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj": {}
+    "D:\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj": {}
   },
   "projects": {
-    "C:\\Users\\usuario\\Desktop\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj": {
+    "D:\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\usuario\\Desktop\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj",
+        "projectUniqueName": "D:\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj",
         "projectName": "WinFormsApp",
-        "projectPath": "C:\\Users\\usuario\\Desktop\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj",
-        "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\usuario\\Desktop\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\obj\\",
+        "projectPath": "D:\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\WinFormsApp.vbproj",
+        "packagesPath": "C:\\Users\\Serrperry\\.nuget\\packages\\",
+        "outputPath": "D:\\2DAM\\DdI\\1T\\Tema1\\WinFormsApp\\WinFormsApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Serrperry\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
