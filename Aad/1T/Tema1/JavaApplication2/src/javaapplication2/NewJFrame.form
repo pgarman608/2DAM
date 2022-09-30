@@ -33,7 +33,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jb_Alta" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jb_elminar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jb_Guardar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -112,7 +112,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jb_Alta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jb_elminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jb_Guardar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
@@ -171,10 +171,13 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar de Alta"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_AltaActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jb_elminar">
+    <Component class="javax.swing.JButton" name="jb_Guardar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Reset"/>
+        <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
     </Component>
   </SubComponents>

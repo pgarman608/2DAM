@@ -5,9 +5,18 @@
  */
 package javaapplication2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,7 +49,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jtf_Exp = new javax.swing.JTextField();
         jtf_Fecha = new javax.swing.JTextField();
         jb_Alta = new javax.swing.JButton();
-        jb_elminar = new javax.swing.JButton();
+        jb_Guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 380));
@@ -61,8 +70,13 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel7.setText("Fecha de Nacimento");
 
         jb_Alta.setText("Dar de Alta");
+        jb_Alta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_AltaActionPerformed(evt);
+            }
+        });
 
-        jb_elminar.setText("Reset");
+        jb_Guardar.setText("Guardar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +88,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jb_Alta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jb_elminar))
+                        .addComponent(jb_Guardar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -136,22 +150,46 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_Alta)
-                    .addComponent(jb_elminar))
+                    .addComponent(jb_Guardar))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    private int comprobarDatos(){
-       int res = 0;
+
+    private void jb_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_AltaActionPerformed
+        File f1 = new File(".\\Alumno.dat");
+        FileOutputStream fos1;
+        ObjectOutputStream oos;
+        try {
+            fos1 = new FileOutputStream(f1);
+            oos = new ObjectOutputStream(fos1);
+            oos.writeObject(this.comprobarDatos());
+            oos.close();
+        } catch (FileNotFoundException ex) {
+             JOptionPane.showMessageDialog(this, "Error 1");
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(this, "Error 2");
+        }
+    }//GEN-LAST:event_jb_AltaActionPerformed
+    private Alumno comprobarDatos(){
        int ne;
        double nm;
-       Date fn;
+       Date fn = null;
+       String aux;
+       Alumno alumno = null;
        ne = Integer.parseInt(this.jtf_Exp.getText());
        nm = Double.parseDouble(this.jtf_NotaM.getText());
-       fn = new SimpleDateFormat("dd/MM/yyyy").parse(this.jtf_Fecha.getText().toString());
-       return res;
+       aux = this.jtf_Fecha.getText().toString();
+       try{
+            fn = new SimpleDateFormat("dd/MM/yyyy").parse(aux);
+            alumno = new Alumno(ne,nm,this.jtf_nombre.getText(),
+            this.jtf_apellido1.getText(),this.jtf_apellido2.getText(),fn);
+        }catch(ParseException e){
+            JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto (dd/mm/yyyy)");
+        }
+       return alumno;
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -194,7 +232,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jb_Alta;
-    private javax.swing.JButton jb_elminar;
+    private javax.swing.JButton jb_Guardar;
     private javax.swing.JTextField jtf_Exp;
     private javax.swing.JTextField jtf_Fecha;
     private javax.swing.JTextField jtf_NotaM;
