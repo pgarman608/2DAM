@@ -6,9 +6,11 @@
 package javaapplication2;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -159,20 +161,35 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_AltaActionPerformed
-        File f1 = new File(".\\Alumno.dat");
+        File f1 = new File(".\\Antonio.dat");
         FileOutputStream fos1;
         ObjectOutputStream oos;
+        FileInputStream fis1;
+        ObjectInputStream ois;
         try {
             fos1 = new FileOutputStream(f1);
             oos = new ObjectOutputStream(fos1);
-            oos.writeObject(this.comprobarDatos());
+            System.out.println(this.comprobarDatos().toString());
+            oos.writeObject((Object)this.comprobarDatos());
+            fis1 = new FileInputStream(f1);
+            ois = new ObjectInputStream(fis1);
+            Alumno al = (Alumno)ois.readObject();
+            System.out.println(al.toString());
             oos.close();
+            ois.close();
+            fis1.close();
+            fos1.close();
         } catch (FileNotFoundException ex) {
              JOptionPane.showMessageDialog(this, "Error 1");
         } catch (IOException ex) {
+            System.out.println(ex.getMessage() + "Hola");
              JOptionPane.showMessageDialog(this, "Error 2");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error 3");
         }
     }//GEN-LAST:event_jb_AltaActionPerformed
+    
+    
     private Alumno comprobarDatos(){
        int ne;
        double nm;
